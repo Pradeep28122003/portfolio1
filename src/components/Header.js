@@ -1,35 +1,64 @@
-
-import { Bars3Icon} from '@heroicons/react/24/solid'
-import {useState} from 'react'
-import './Header.scss';
+import { Bars3Icon } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import "./Header.scss";
 
 export default function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
 
-  return<header className='flex justify-between px-5 py-3 bg-first'>  
-    <a  className="header" href='#'> My Portfolio</a>
-    <nav className='hidden md:block'>
-    <ul className='flex text-white'>
-        <li><a href='#'>Home</a></li>
-        <li><a href='#about'>About</a></li>
-        <li><a href='#projects'>Projects</a></li>
-         <li><a href='#resume'>Resume</a></li>
-        <li><a href='#contact'>Contact</a></li>
+  const handleNavigation = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setToggleMenu(false);
+    }
+  };
 
-    
-    </ul>
-    </nav>
-    {toggleMenu &&<nav className='block md:hidden'>
-    <ul onClick={() => setToggleMenu(!toggleMenu)} className='flex flex-col text-white  mobile-nav'>
-        <li><a href='#'>Home</a></li>
-        <li><a href='#about'>About</a></li>
-        <li><a href='#projects'>Projects</a></li>
-        <li><a href='#resume'>Resume</a></li>
-        <li><a href='#contact'>Contact</a></li>
+  return (
+    <header className="header">
+      <div className="header__container">
+        {/* Logo */}
+        <span
+          className="header__logo"
+          onClick={() => handleNavigation("home")}
+        >
+          My Portfolio
+        </span>
 
-    
-    </ul>
-    </nav>}
-    <button onClick={()=> setToggleMenu(!toggleMenu)} className='block md:hidden '><Bars3Icon className="text-white h-4"/></button>
-  </header>
+        <nav className="header__nav">
+          <ul className="header__menu">
+            <li><button onClick={() => handleNavigation("home")}>Home</button></li>
+            <li><button onClick={() => handleNavigation("about")}>About</button></li>
+            <li><button onClick={() => handleNavigation("projects")}>Projects</button></li>
+            <li><button onClick={() => handleNavigation("resume")}>Resume</button></li>
+            <li><button onClick={() => handleNavigation("contact")}>Contact</button></li>
+          </ul>
+        </nav>
+
+       
+        {toggleMenu && (
+          <nav className="header__mobile">
+            <ul
+              className="header__mobile-menu"
+              onClick={() => setToggleMenu(false)}
+            >
+              <li><button onClick={() => handleNavigation("home")}>Home</button></li>
+              <li><button onClick={() => handleNavigation("about")}>About</button></li>
+              <li><button onClick={() => handleNavigation("projects")}>Projects</button></li>
+              <li><button onClick={() => handleNavigation("resume")}>Resume</button></li>
+              <li><button onClick={() => handleNavigation("contact")}>Contact</button></li>
+            </ul>
+          </nav>
+        )}
+
+      
+        <button
+          onClick={() => setToggleMenu(!toggleMenu)}
+          className="header__toggle"
+          aria-label="Toggle navigation menu"
+        >
+          <Bars3Icon className="header__icon" />
+        </button>
+      </div>
+    </header>
+  );
 }

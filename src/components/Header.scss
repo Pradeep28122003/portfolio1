@@ -1,106 +1,154 @@
-.header{
-    font-weight: bold;
-    font-size: 1 rem;
-    color: whitesmoke;
-    left: 20px;
-    position: relative;
+:root {
+  --first: #0d1117; // header background
+  --accent: #00d4ff; // hover highlight
+  --text-light: #ffffff;
+  --text-dark: #000000;
 }
 
-header {
-  background-color: black; 
+/* =======================
+   HEADER BASE STYLES
+======================= */
+.header {
+  background-color: var(--first);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
+}
+
+/* Container Layout */
+.header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-//   padding: 12px 24px; 
-  top: 0;
-  right: 10px;
-  width: 100%;
-  z-index: 1000;
-  position: absolute;
+  padding: 0.75rem 1.5rem;
+}
 
-  a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 600;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
+/* Logo */
+.header__logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: color 0.3s ease;
 
-    &:hover {
-      color: #fff;
-    }
+  &:hover {
+    color: var(--accent);
   }
+}
 
-  nav {
-    ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
+/* =======================
+   DESKTOP NAVIGATION
+======================= */
+.header__nav {
+  display: none;
 
-      li {
-        a {
-          color: white;
-          font-weight: 500;
-          padding: 8px 12px;
-          border-radius: 6px;
-          transition: background 0.3s ease, color 0.3s ease;
-
-          &:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffeb3b;
-          }
-        }
-      }
-    }
+  @media (min-width: 768px) {
+    display: block;
   }
+}
 
- 
-  .mobile-nav {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: var(--first-color);
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    transition: all 0.3s ease-in-out;
-    animation: slideDown 0.3s ease forwards;
+.header__menu {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
 
-    li {
-      margin: 10px 0;
-
-      a {
-        color: white;
-        font-size: 1rem;
-        text-transform: uppercase;
-
-        &:hover {
-          color: #ffeb3b;
-        }
-      }
-    }
-  }
-
-  
-  button {
+  li button {
     background: none;
     border: none;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
 
-    svg {
-      height: 1.5rem;
-      width: 1.5rem;
-      color: white;
-      transition: transform 0.2s ease;
-
-      &:hover {
-        transform: scale(1.1);
-      }
+    &:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
     }
   }
 }
 
+/* =======================
+   MOBILE MENU
+======================= */
+.header__mobile {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: var(--first);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.3s ease forwards;
 
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header__mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  list-style: none;
+  margin: 0;
+
+  li button {
+    width: 100%;
+    padding: 0.75rem 0;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--accent);
+    }
+  }
+}
+
+/* =======================
+   HAMBURGER ICON
+======================= */
+.header__toggle {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--text-light);
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+/* =======================
+   ANIMATIONS
+======================= */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -109,14 +157,5 @@ header {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-
-@media (max-width: 768px) {
-  header {
-    nav {
-      display: none;
-    }
   }
 }
