@@ -1,0 +1,64 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 2rem;
+  background: #1b1f3b; // similar to "bg-second"
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.4;
+      position: relative;
+      right: 200px;
+
+      p {
+        font-size: 1.8rem;
+        color: #00d4ff;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .hero-icons {
+      display: flex;
+      padding-top: 2.5rem;
+      position: relative;
+      top: -40px;
+
+      .icon {
+        margin-right: 1.5rem;
+        color: #00d4ff;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .hero-img {
+    width: 80%;
+    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    @media (min-width: 768px) {
+      width: 33%;
+    }
+  }
+}
