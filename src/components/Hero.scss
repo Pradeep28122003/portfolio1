@@ -1,14 +1,17 @@
 .hero {
   display: flex;
   flex-direction: column;
-  padding: 5rem 2rem;
-  background: #1b1f3b; // similar to "bg-second"
+  padding: 3rem 1.5rem;
+  background: #1b1f3b;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 
+  
   @media (min-width: 768px) {
     flex-direction: row;
+    padding: 5rem 2rem;
+    gap: 4rem;
   }
 
   .hero-content {
@@ -18,31 +21,54 @@
     flex-direction: column;
     color: #fff;
     font-family: 'Poppins', sans-serif;
+    text-align: center;
+
+    
+    @media (min-width: 768px) {
+      text-align: left;
+    }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 600;
       line-height: 1.4;
       position: relative;
-      right: 200px;
+      right: 0;
+
+
+      @media (min-width: 768px) {
+        font-size: 2.4rem;
+        right: 80px;
+      }
 
       p {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         color: #00d4ff;
         margin-top: 0.5rem;
+
+        @media (min-width: 768px) {
+          font-size: 1.8rem;
+        }
       }
     }
 
     .hero-icons {
       display: flex;
-      padding-top: 2.5rem;
-      position: relative;
-      top: -40px;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+
+      /* Desktop alignment */
+      @media (min-width: 768px) {
+        justify-content: flex-start;
+        position: relative;
+        top: -20px;
+      }
 
       .icon {
-        margin-right: 1.5rem;
+        font-size: 1.8rem;
         color: #00d4ff;
-        transition: color 0.3s ease;
+        transition: 0.3s;
 
         &:hover {
           color: #fff;
@@ -52,13 +78,13 @@
   }
 
   .hero-img {
-    width: 80%;
-    max-width: 350px;
+    width: 70%;
+    max-width: 320px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
     @media (min-width: 768px) {
       width: 33%;
+      max-width: 350px;
     }
   }
 }
