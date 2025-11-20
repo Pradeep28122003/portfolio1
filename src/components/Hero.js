@@ -4,33 +4,35 @@ import { AiOutlineTwitter, AiOutlineFacebook, AiOutlineLinkedin } from "react-ic
 import "./Hero.scss";
 
 export default function Hero() {
-  // optional: handle icon clicks
-  const handleSocialClick = (platform) => {
-    if (platform === "twitter") {
-      window.open("https://twitter.com/", "_blank");
-    } else if (platform === "facebook") {
-      window.open("https://facebook.com/", "_blank");
-    } else if (platform === "linkedin") {
-      window.open("https://linkedin.com/", "_blank");
-    }
+  
+  const name = "Pradeep Kumar";
+
+  const twitter = "https://twitter.com/";
+  const facebook = "https://facebook.com/";
+  const linkedin = "https://linkedin.com/";
+
+  const handleSocialClick = (url) => {
+    window.open(url, "_blank");
   };
 
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       <div className="hero-content">
         <h1>
-          Hi, <br /> I'm <span className="hero-name">Pradeep</span>
-          <p>I'm a Full-stack Developer</p>
+          Hi, <br /> I'm <span className="hero-name">{name}</span>
         </h1>
+        <p className="name">I'm a Full Stack Developer</p>
 
         <div className="hero-icons">
-          <button className="icon" onClick={() => handleSocialClick("twitter")} aria-label="Twitter">
+          <button className="icon" onClick={() => handleSocialClick(twitter)}>
             <AiOutlineTwitter size={40} />
           </button>
-          <button className="icon" onClick={() => handleSocialClick("facebook")} aria-label="Facebook">
+
+          <button className="icon" onClick={() => handleSocialClick(facebook)}>
             <AiOutlineFacebook size={40} />
           </button>
-          <button className="icon" onClick={() => handleSocialClick("linkedin")} aria-label="LinkedIn">
+
+          <button className="icon" onClick={() => handleSocialClick(linkedin)}>
             <AiOutlineLinkedin size={40} />
           </button>
         </div>

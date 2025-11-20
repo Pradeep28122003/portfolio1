@@ -13,7 +13,7 @@ export default function About() {
         <div className="about-content">
           <h1>About Me</h1>
           <p>
-            I’m a full-stack developer specializing in React.js and Spring Boot.
+            I'm a full-stack developer specializing in React.js and Spring Boot.
             I enjoy turning ideas into real-world applications and constantly
             learning new tools and frameworks to improve my craft.
           </p>

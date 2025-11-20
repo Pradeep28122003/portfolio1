@@ -9,21 +9,20 @@ export default function Header() {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
-      setToggleMenu(false);
+      setToggleMenu(false); // Close mobile menu on click
     }
   };
 
   return (
     <header className="header">
       <div className="header__container">
+
         {/* Logo */}
-        <span
-          className="header__logo"
-          onClick={() => handleNavigation("home")}
-        >
+        <span className="header__logo" onClick={() => handleNavigation("home")}>
           My Portfolio
         </span>
 
+        {/* Desktop Menu */}
         <nav className="header__nav">
           <ul className="header__menu">
             <li><button onClick={() => handleNavigation("home")}>Home</button></li>
@@ -34,13 +33,10 @@ export default function Header() {
           </ul>
         </nav>
 
-       
+        {/* Mobile Menu */}
         {toggleMenu && (
           <nav className="header__mobile">
-            <ul
-              className="header__mobile-menu"
-              onClick={() => setToggleMenu(false)}
-            >
+            <ul className="header__mobile-menu">
               <li><button onClick={() => handleNavigation("home")}>Home</button></li>
               <li><button onClick={() => handleNavigation("about")}>About</button></li>
               <li><button onClick={() => handleNavigation("projects")}>Projects</button></li>
@@ -50,14 +46,15 @@ export default function Header() {
           </nav>
         )}
 
-      
+        {/* Hamburger */}
         <button
           onClick={() => setToggleMenu(!toggleMenu)}
           className="header__toggle"
-          aria-label="Toggle navigation menu"
+          aria-label="Toggle menu"
         >
           <Bars3Icon className="header__icon" />
         </button>
+
       </div>
     </header>
   );
