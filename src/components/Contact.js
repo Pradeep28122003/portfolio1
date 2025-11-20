@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getProfile } from '../services/portfolioService';
 import "./Contact.scss";
 
 export default function Contact() {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const data = await getProfile();
+      setProfile(data);
+      setLoading(false);
+    };
+
+    fetchProfile();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="contact-section" id="contact">
+        <div className="contact-container">
+          <h1>Loading...</h1>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="contact-section" id="contact">
       <div className="contact-container">
@@ -14,16 +38,16 @@ export default function Contact() {
           <p>
             <span className="label">Email:</span>{" "}
             <a
-              href="mailto:pradeepkumark2812@gmail.com"
+              href={`mailto:${profile?.email || 'pradeepkumark2812@gmail.com'}`}
               className="contact-link"
             >
-              pradeepkumark2812@gmail.com
+              {profile?.email || 'pradeepkumark2812@gmail.com'}
             </a>
           </p>
           <p>
             <span className="label">Phone:</span>{" "}
-            <a href="tel:+918667477846" className="contact-link">
-              +91 86674 77846
+            <a href={`tel:${profile?.phone || '+918667477846'}`} className="contact-link">
+              {profile?.phone || '+91 86674 77846'}
             </a>
           </p>
         </div>

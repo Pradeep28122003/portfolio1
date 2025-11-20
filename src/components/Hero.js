@@ -1,38 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DeveloperImg from "../assets/developer.jpg";
 import { AiOutlineTwitter, AiOutlineFacebook, AiOutlineLinkedin } from "react-icons/ai";
+import { getProfile } from '../services/portfolioService';
 import "./Hero.scss";
 
 export default function Hero() {
-  // optional: handle icon clicks
-  const handleSocialClick = (platform) => {
-    if (platform === "twitter") {
-      window.open("https://twitter.com/", "_blank");
-    } else if (platform === "facebook") {
-      window.open("https://facebook.com/", "_blank");
-    } else if (platform === "linkedin") {
-      window.open("https://linkedin.com/", "_blank");
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const data = await getProfile();
+      setProfile(data);
+      setLoading(false);
+    };
+
+    fetchProfile();
+  }, []);
+
+  const handleSocialClick = (url) => {
+    if (url) {
+      window.open(url, "_blank");
     }
   };
+
+  if (loading) {
+    return (
+      <section className="hero">
+        <div className="hero-content">
+          <h1>Loading...</h1>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="hero">
       <div className="hero-content">
         <h1>
-          Hi, <br /> I'm <span className="hero-name">Pradeep</span>
-          <p>I'm a Full-stack Developer</p>
+          Hi, <br /> I'm <span className="hero-name">{profile?.name || 'Pradeep'}</span>
+          <p>I'm a {profile?.title || 'Full-stack Developer'}</p>
         </h1>
 
         <div className="hero-icons">
-          <button className="icon" onClick={() => handleSocialClick("twitter")} aria-label="Twitter">
-            <AiOutlineTwitter size={40} />
-          </button>
-          <button className="icon" onClick={() => handleSocialClick("facebook")} aria-label="Facebook">
-            <AiOutlineFacebook size={40} />
-          </button>
-          <button className="icon" onClick={() => handleSocialClick("linkedin")} aria-label="LinkedIn">
-            <AiOutlineLinkedin size={40} />
-          </button>
+          {profile?.twitter_url && (
+            <button className="icon" onClick={() => handleSocialClick(profile.twitter_url)} aria-label="Twitter">
+              <AiOutlineTwitter size={40} />
+            </button>
+          )}
+          {profile?.facebook_url && (
+            <button className="icon" onClick={() => handleSocialClick(profile.facebook_url)} aria-label="Facebook">
+              <AiOutlineFacebook size={40} />
+            </button>
+          )}
+          {profile?.linkedin_url && (
+            <button className="icon" onClick={() => handleSocialClick(profile.linkedin_url)} aria-label="LinkedIn">
+              <AiOutlineLinkedin size={40} />
+            </button>
+          )}
         </div>
       </div>
 
